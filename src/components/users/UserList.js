@@ -20,7 +20,7 @@ const UserList = ({ users, onDeleteClick }) => (
               <Link to={"/user/" + user.email}>{user.username}</Link>
             </td>
             <td>{user.scopeName}</td>
-            <td>{user.password}</td>
+            <td>{"*".repeat(user.password.length)}</td>
             <td>
               <button
                 className="btn btn-outline-danger"
