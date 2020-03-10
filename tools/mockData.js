@@ -1,92 +1,92 @@
-const courses = [
+const users = [
   {
     id: 1,
-    title: "Securing React Apps with Auth0",
-    slug: "react-auth0-authentication-security",
-    authorId: 1,
-    category: "JavaScript"
+    username: "test1.123",
+    email: "test1.123@hotmail.com",
+    scopeId: 1,
+    password: "password123"
   },
   {
     id: 2,
-    title: "React: The Big Picture",
-    slug: "react-big-picture",
-    authorId: 1,
-    category: "JavaScript"
+    username: "tayyab.ahmed",
+    email: "tayyab@ahmed.com",
+    scopeId: 1,
+    password: "password123"
   },
   {
     id: 3,
-    title: "Creating Reusable React Components",
-    slug: "react-creating-reusable-components",
-    authorId: 1,
-    category: "JavaScript"
+    username: "simon.laalo",
+    email: "simon@laalo.com",
+    scopeId: 1,
+    password: "password123"
   },
   {
     id: 4,
-    title: "Building a JavaScript Development Environment",
-    slug: "javascript-development-environment",
-    authorId: 1,
-    category: "JavaScript"
+    username: "adrien.poirson",
+    email: "adrien@poirson.com",
+    scopeId: 3,
+    password: "password123"
   },
   {
     id: 5,
-    title: "Building Applications with React and Redux",
-    slug: "react-redux-react-router-es6",
-    authorId: 1,
-    category: "JavaScript"
+    username: "simona.hera",
+    email: "simona@hera.com",
+    scopeId: 1,
+    password: "password123"
   },
   {
     id: 6,
-    title: "Building Applications in React and Flux",
-    slug: "react-flux-building-applications",
-    authorId: 1,
-    category: "JavaScript"
+    username: "luke.evans",
+    email: "luke@evans.com",
+    scopeId: 2,
+    password: "password123"
   },
   {
     id: 7,
-    title: "Clean Code: Writing Code for Humans",
-    slug: "writing-clean-code-humans",
-    authorId: 1,
-    category: "Software Practices"
+    username: "hello.world",
+    email: "hello@world.com",
+    scopeId: 3,
+    password: "password123"
   },
   {
     id: 8,
-    title: "Architecting Applications for the Real World",
-    slug: "architecting-applications-dotnet",
-    authorId: 1,
-    category: "Software Architecture"
+    username: "alex.d",
+    email: "alex@alex.com",
+    scopeId: 1,
+    password: "password123"
   },
   {
     id: 9,
-    title: "Becoming an Outlier: Reprogramming the Developer Mind",
-    slug: "career-reboot-for-developer-mind",
-    authorId: 1,
-    category: "Career"
+    username: "sally.k",
+    email: "sally@calabrio.com",
+    scopeId: 2,
+    password: "password123"
   },
   {
     id: 10,
-    title: "Web Component Fundamentals",
-    slug: "web-components-shadow-dom",
-    authorId: 1,
-    category: "HTML5"
+    username: "canada.calabrio",
+    email: "canada@calabrio.com",
+    scopeId: 3,
+    password: "password123"
   }
 ];
 
-const authors = [
-  { id: 1, name: "Cory House" },
-  { id: 2, name: "Scott Allen" },
-  { id: 3, name: "Dan Wahlin" }
+const scope = [
+  { id: 1, name: "administrator" },
+  { id: 2, name: "power" },
+  { id: 3, name: "user" }
 ];
 
-const newCourse = {
+const newUser = {
   id: null,
-  title: "",
-  authorId: null,
-  category: ""
+  username: "",
+  scopeId: null,
+  password: ""
 };
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
-  newCourse,
-  courses,
-  authors
+  newUser,
+  users,
+  scope
 };

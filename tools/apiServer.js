@@ -30,7 +30,7 @@ server.use(jsonServer.bodyParser);
 
 // Simulate delay on all requests
 server.use(function(req, res, next) {
-  setTimeout(next, 2000);
+  setTimeout(next, 0);
 });
 
 // Declaring custom routes below. Add custom routes before JSON Server router
@@ -44,12 +44,12 @@ server.use((req, res, next) => {
   next();
 });
 
-server.post("/courses/", function(req, res, next) {
-  const error = validateCourse(req.body);
+server.post("/users/", function(req, res, next) {
+  const error = validateUser(req.body);
   if (error) {
     res.status(400).send(error);
   } else {
-    req.body.slug = createSlug(req.body.title); // Generate a slug for new courses.
+    req.body.email = createSlug(req.body.username); // Generate a email for new users.
     next();
   }
 });
@@ -65,7 +65,7 @@ server.listen(port, () => {
 
 // Centralized logic
 
-// Returns a URL friendly slug
+// Returns a URL friendly email
 function createSlug(value) {
   return value
     .replace(/[^a-z0-9_]+/gi, "-")
@@ -73,9 +73,9 @@ function createSlug(value) {
     .toLowerCase();
 }
 
-function validateCourse(course) {
-  if (!course.title) return "Title is required.";
-  if (!course.authorId) return "Author is required.";
-  if (!course.category) return "Category is required.";
+function validateUser(user) {
+  if (!user.username) return "Username is required.";
+  if (!user.scopeId) return "Scope is required.";
+  if (!user.password) return "Password is required.";
   return "";
 }

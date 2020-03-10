@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
-const CourseForm = ({
-  course,
-  authors,
+const UserForm = ({
+  user,
+  scope,
   onSave,
   onChange,
   saving = false,
@@ -13,39 +13,39 @@ const CourseForm = ({
 }) => {
   return (
     <form onSubmit={onSave}>
-      <h2>{course.id ? "Edit" : "Add"} Course</h2>
+      <h2>{user.id ? "Edit" : "Add"} User</h2>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
         </div>
       )}
       <TextInput
-        name="title"
-        label="Title"
-        value={course.title}
+        name="username"
+        label="Username"
+        value={user.username}
         onChange={onChange}
-        error={errors.title}
+        error={errors.username}
       />
 
       <SelectInput
-        name="authorId"
-        label="Author"
-        value={course.authorId || ""}
-        defaultOption="Select Author"
-        options={authors.map(author => ({
-          value: author.id,
-          text: author.name
+        name="scopeId"
+        label="Scope"
+        value={user.scopeId || ""}
+        defaultOption="Select Scope"
+        options={scope.map(scope => ({
+          value: scope.id,
+          text: scope.name
         }))}
         onChange={onChange}
-        error={errors.author}
+        error={errors.scope}
       />
 
       <TextInput
-        name="category"
-        label="Category"
-        value={course.category}
+        name="password"
+        label="Password"
+        value={user.password}
         onChange={onChange}
-        error={errors.category}
+        error={errors.password}
       />
 
       <button type="submit" disabled={saving} className="btn btn-primary">
@@ -55,13 +55,13 @@ const CourseForm = ({
   );
 };
 
-CourseForm.propTypes = {
-  authors: PropTypes.array.isRequired,
-  course: PropTypes.object.isRequired,
+UserForm.propTypes = {
+  scope: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool
 };
 
-export default CourseForm;
+export default UserForm;
