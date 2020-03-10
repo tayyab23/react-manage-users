@@ -24,9 +24,14 @@ function HomePage(errors, onChange) {
         error={errors.password}
       />
 
-      <Link to="users" className="btn btn-primary btn-lg">
-        Login
-      </Link>
+      <div className="btn-group">
+        <Link to="users" className="btn btn-primary btn-lg">
+          Login
+        </Link>
+        <Link to="user" className="btn btn-secondary btn-lg">
+          Sign up
+        </Link>
+      </div>
     </div>
   );
 }
