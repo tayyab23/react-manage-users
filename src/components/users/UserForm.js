@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
+import PasswordInput from "../common/PasswordInput";
 
 const UserForm = ({
   user,
@@ -27,6 +28,14 @@ const UserForm = ({
         error={errors.username}
       />
 
+      <TextInput
+        name="email"
+        label="Email"
+        value={user.email}
+        onChange={onChange}
+        error={errors.email}
+      />
+
       <SelectInput
         name="scopeId"
         label="Scope"
@@ -40,7 +49,7 @@ const UserForm = ({
         error={errors.scope}
       />
 
-      <TextInput
+      <PasswordInput
         name="password"
         label="Password"
         value={user.password}

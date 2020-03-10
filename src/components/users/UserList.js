@@ -7,6 +7,7 @@ const UserList = ({ users, onDeleteClick }) => (
     <thead>
       <tr>
         <th>Username</th>
+        <th>Email</th>
         <th>Scope</th>
         <th>Password</th>
         <th />
@@ -19,6 +20,7 @@ const UserList = ({ users, onDeleteClick }) => (
             <td>
               <Link to={"/user/" + user.email}>{user.username}</Link>
             </td>
+            <td>{user.email}</td>
             <td>{user.scopeName}</td>
             <td>{"*".repeat(user.password.length)}</td>
             <td>

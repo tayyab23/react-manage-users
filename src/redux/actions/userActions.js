@@ -3,19 +3,19 @@ import * as userApi from "../../api/userApi";
 import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadUsersSuccess(users) {
-  return { type: types.LOAD_COURSES_SUCCESS, users: users };
+  return { type: types.LOAD_USERS_SUCCESS, users: users };
 }
 
 export function createUserSuccess(user) {
-  return { type: types.CREATE_COURSE_SUCCESS, user };
+  return { type: types.CREATE_USER_SUCCESS, user };
 }
 
 export function updateUserSuccess(user) {
-  return { type: types.UPDATE_COURSE_SUCCESS, user };
+  return { type: types.UPDATE_USER_SUCCESS, user };
 }
 
 export function deleteUserOptimistic(user) {
-  return { type: types.DELETE_COURSE_OPTIMISTIC, user };
+  return { type: types.DELETE_USER_OPTIMISTIC, user };
 }
 
 export function loadUsers() {

@@ -3,7 +3,7 @@ import * as scopeApi from "../../api/scopeApi";
 import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadScopesSuccess(scope) {
-  return { type: types.LOAD_AUTHORS_SUCCESS, scope };
+  return { type: types.LOAD_SCOPES_SUCCESS, scope };
 }
 
 export function loadScopes() {

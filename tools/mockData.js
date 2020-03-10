@@ -1,10 +1,10 @@
 const users = [
   {
     id: 1,
-    username: "test1.123",
-    email: "test1.123@hotmail.com",
+    username: "admin",
+    email: "admin@indicee.com",
     scopeId: 1,
-    password: "password123"
+    password: "admin0"
   },
   {
     id: 2,

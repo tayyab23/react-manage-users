@@ -46,10 +46,11 @@ function ManageUsersPage({
   }
 
   function formIsValid() {
-    const { username, scopeId, password } = user;
+    const { username, email, scopeId, password } = user;
     const errors = {};
 
     if (!username) errors.username = "Username is required.";
+    if (!email) errors.email = "Email is required.";
     if (!scopeId) errors.scope = "Scope is required.";
     if (!password) errors.password = "Password is required.";
 
