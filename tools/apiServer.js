@@ -54,6 +54,17 @@ server.post("/users/", function(req, res, next) {
   }
 });
 
+server.post("/cookies/", function(req, res, next) {
+  const error = validateCookie(req.body);
+  if (error) {
+    res.status(400).send(error);
+  } else {
+    // set the cookie to expire one minute from now
+    req.body.expiresEpoch = Math.round(new Date().getTime() / 1000) + 60;
+    next();
+  }
+});
+
 // Use default router
 server.use(router);
 
@@ -77,5 +88,11 @@ function validateUser(user) {
   if (!user.username) return "Username is required.";
   if (!user.scopeId) return "Scope is required.";
   if (!user.password) return "Password is required.";
+  return "";
+}
+
+function validateCookie(cookie) {
+  if (!cookie.id) return "Id = userId required for Cookie.";
+  if (!cookie.cookie) return "Cookie is required.";
   return "";
 }

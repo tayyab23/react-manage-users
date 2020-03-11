@@ -77,6 +77,8 @@ const scope = [
   { id: 3, name: "user" }
 ];
 
+const cookies = [{ id: 0, cookie: "aCookieString", expiresEpoch: 0 }];
+
 const newUser = {
   id: null,
   username: "",
@@ -84,9 +86,17 @@ const newUser = {
   password: ""
 };
 
+const newCookie = {
+  id: null,
+  cookie: "",
+  expiresEpoch: null
+};
+
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
   newUser,
+  newCookie,
   users,
-  scope
+  scope,
+  cookies
 };
