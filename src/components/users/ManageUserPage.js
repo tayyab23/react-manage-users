@@ -46,13 +46,14 @@ function ManageUsersPage({
   }
 
   function formIsValid() {
-    const { username, email, scopeId, password } = user;
+    const { username, email, scopeId, password, cPassword } = user;
     const errors = {};
 
     if (!username) errors.username = "Username is required.";
     if (!email) errors.email = "Email is required.";
     if (!scopeId) errors.scope = "Scope is required.";
     if (!password) errors.password = "Password is required.";
+    if (cPassword != password) errors.cPassword = "Passwords do not match.";
 
     setErrors(errors);
     return Object.keys(errors).length === 0;

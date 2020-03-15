@@ -57,6 +57,14 @@ const UserForm = ({
         error={errors.password}
       />
 
+      <PasswordInput
+        name="cPassword"
+        label="Confirm Password"
+        value={user.cPassword}
+        onChange={onChange}
+        error={errors.cPassword}
+      />
+
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Saving..." : "Save"}
       </button>
