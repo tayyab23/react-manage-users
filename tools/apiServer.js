@@ -54,13 +54,13 @@ server.post("/users/", function(req, res, next) {
   }
 });
 
-server.post("/cookies/", function(req, res, next) {
-  const error = validateCookie(req.body);
+server.post("/sessions/", function(req, res, next) {
+  const error = validateSession(req.body);
   if (error) {
     res.status(400).send(error);
   } else {
-    // set the cookie to expire one minute from now
-    req.body.expiresEpoch = Math.round(new Date().getTime() / 1000) + 60;
+    // set the session to expire one minute from now
+    req.body.expiresEpoch = Math.round(new Date().getTime() / 1000) + 30;
     next();
   }
 });
@@ -91,8 +91,9 @@ function validateUser(user) {
   return "";
 }
 
-function validateCookie(cookie) {
-  if (!cookie.id) return "Id = userId required for Cookie.";
-  if (!cookie.cookie) return "Cookie is required.";
+function validateSession(session) {
+  if (!session.id) return "Id (mapped to userId) required for Session.";
+  if (!session.string) return "Session string is required.";
+  if (!session.scopeId) return "ScopeId is required.";
   return "";
 }

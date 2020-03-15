@@ -2,23 +2,23 @@ const users = [
   {
     id: 1,
     username: "admin",
-    email: "admin@indicee.com",
+    email: "admin@admin.com",
     scopeId: 1,
     password: "admin0"
   },
   {
     id: 2,
-    username: "tayyab.ahmed",
-    email: "tayyab@ahmed.com",
-    scopeId: 1,
-    password: "password123"
+    username: "power",
+    email: "power@power.com",
+    scopeId: 2,
+    password: "power0"
   },
   {
     id: 3,
-    username: "simon.laalo",
-    email: "simon@laalo.com",
-    scopeId: 1,
-    password: "password123"
+    username: "user",
+    email: "user@user.com",
+    scopeId: 3,
+    password: "user0"
   },
   {
     id: 4,
@@ -36,8 +36,8 @@ const users = [
   },
   {
     id: 6,
-    username: "luke.evans",
-    email: "luke@evans.com",
+    username: "tayyab.ahmed",
+    email: "tayyab@ahmed.com",
     scopeId: 2,
     password: "password123"
   },
@@ -77,7 +77,9 @@ const scope = [
   { id: 3, name: "user" }
 ];
 
-const cookies = [{ id: 0, cookie: "aCookieString", expiresEpoch: 0 }];
+const sessions = [
+  { id: 0, string: "aSessionString", scopeId: 1, expiresEpoch: 0 }
+];
 
 const newUser = {
   id: null,
@@ -86,17 +88,18 @@ const newUser = {
   password: ""
 };
 
-const newCookie = {
+const newSession = {
   id: null,
-  cookie: "",
+  string: "",
+  scopeId: null,
   expiresEpoch: null
 };
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
   newUser,
-  newCookie,
+  newSession,
   users,
   scope,
-  cookies
+  sessions
 };

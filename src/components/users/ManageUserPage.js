@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 import { loadUsers, saveUser } from "../../redux/actions/userActions";
 import { loadScopes } from "../../redux/actions/scopeActions";
-import PropTypes from "prop-types";
 import UserForm from "./UserForm";
 import { newUser } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
-import { toast } from "react-toastify";
 
 function ManageUsersPage({
   users,
