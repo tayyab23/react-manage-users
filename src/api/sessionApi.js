@@ -13,23 +13,8 @@ export function getSession(id) {
     .catch(handleError);
 }
 
-export function saveSession(session) {
-  // delete old session
-  return getSessions()
-    .then(sessions => {
-      var sessionFound = false;
-      var i = 0;
-      while (!sessionFound && i < sessions.length) {
-        sessionFound = session.id === sessions[i].id;
-        i++;
-      }
-      sessionFound ? updateSession(session) : addNewSession(session);
-    })
-    .catch(handleError);
-}
-
 export function addNewSession(session) {
-  fetch(sessionUrl, {
+  return fetch(sessionUrl, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(session)
@@ -39,7 +24,7 @@ export function addNewSession(session) {
 }
 
 export function updateSession(session) {
-  fetch(sessionUrl + session.id, {
+  return fetch(sessionUrl + session.id, {
     method: "PUT",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(session)

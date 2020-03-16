@@ -5,12 +5,12 @@ import { beginApiCall, apiCallError } from "./apiStatusActions";
 import { newSession } from "../../../tools/mockData";
 import { loadUsersSuccess } from "./userActions";
 
-export function updateLoginSuccess(session) {
-  return { type: types.LOGIN_SESSION_SUCCESS, session: session };
+export function loginSessionSuccess(session) {
+  return { type: types.CREATE_SESSION_SUCCESS, session: session };
 }
 
 export function getSessionsSuccess(session) {
-  return { type: types.GET_SESSION_SUCCESS, session: session };
+  return { type: types.GET_SESSION_SUCCESS, session };
 }
 
 export function deleteLoginSessionSuccess() {
@@ -31,15 +31,48 @@ export function validateClientSession(clientSession) {
   });
 }
 
+// export function initSession(session) {
+//   debugger;
+//   return function(dispatch) {
+//     dispatch(beginApiCall());
+//     return sessionApi.getSessions().then(allSessions => {
+//       debugger;
+//       const sessionFound = checkIfMySessionIsFoundAmongAllSessions(
+//         session,
+//         allSessions
+//       );
+//       dispatch(getSessionsSuccess(session));
+//       dispatch(beginApiCall());
+//       if (sessionFound) {
+//         sessionApi.updateSession(session).then(session => {
+//           dispatch(updateLoginSuccess(session));
+//         });
+//       } else {
+//         sessionApi.addNewSession(session).then(session => {
+//           dispatch(updateLoginSuccess(session));
+//         });
+//       }
+//     });
+//   };
+// }
+
+// export function checkIfMySessionIsFoundAmongAllSessions(session, allSessions) {
+//   var sessionFound = false;
+//   var i = 0;
+//   while (!sessionFound && i < allSessions.length) {
+//     sessionFound = session.id === allSessions[i].id;
+//     i++;
+//   }
+//   return sessionFound;
+// }
+
 export function initSession(session) {
   return function(dispatch) {
     dispatch(beginApiCall());
-
     return sessionApi
-      .saveSession(session)
+      .addNewSession(session)
       .then(session => {
-        dispatch(getSessionsSuccess(session));
-        dispatch(updateLoginSuccess(session));
+        dispatch(loginSessionSuccess(session));
       })
       .catch(error => {
         apiCallError(error);
@@ -54,25 +87,24 @@ export function validateUser(user) {
     return userApi
       .getUsers()
       .then(users => {
-        const matchingUser = findUserInDbUsers(user, users);
-        if (
-          matchingUser != undefined &&
-          matchingUser.password === user.password
-        ) {
-          const session = generateSessionJson(matchingUser);
-          dispatch(initSession(session));
-          dispatch(loadUsersSuccess(users));
-          return session;
-        } else {
-          failLogin();
-        }
+        dispatch(loadUsersSuccess(users));
+        return returnNewSession(user, users);
       })
       .catch(error => {
-        failLogin();
         apiCallError(error);
         throw error;
       });
   };
+}
+
+export function returnNewSession(user, users) {
+  const matchingUser = findUserInDbUsers(user, users);
+
+  if (matchingUser != undefined && matchingUser.password === user.password) {
+    return generateSessionJson(matchingUser);
+  } else {
+    return null;
+  }
 }
 
 function generateSessionJson(user) {
@@ -88,10 +120,7 @@ function generateSessionJson(user) {
 
 function findUserInDbUsers(user, users) {
   for (let i = 0; i < users.length; i++) {
-    if (
-      user.username === users[i].email ||
-      user.username === users[i].username
-    ) {
+    if (user.username == users[i].email || user.username == users[i].username) {
       return users[i];
     }
   }

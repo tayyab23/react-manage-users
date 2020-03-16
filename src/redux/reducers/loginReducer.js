@@ -3,14 +3,14 @@ import initialState from "./initialState";
 
 export default function loginReducer(state = initialState.session, action) {
   switch (action.type) {
-    case types.LOGIN_SESSION_SUCCESS:
-      return [...state, ...action.session];
+    case types.CREATE_SESSION_SUCCESS:
+      return action.session;
     case types.GET_SESSION_SUCCESS:
       return state;
     case types.DELETE_SESSION_SUCCESS:
-      return [...state, null];
+      return state.filter(session => session.id !== action.session.id);
     case types.LOGIN_FAIL:
-      return [...state, null];
+      return state.filter(session => session.id !== action.session.id);
     default:
       return state;
   }

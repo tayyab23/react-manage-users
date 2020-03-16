@@ -4,22 +4,29 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import {
   validateUser,
-  validateClientSession
+  validateClientSession,
+  initSession
 } from "../../redux/actions/loginActions";
 import LoginForm from "./LoginForm";
 import { newUser, newSession } from "../../../tools/mockData";
 
-function HomePage({ validateUser, history, ...props }) {
+function HomePage({
+  validateUser,
+  initSession,
+  validateClientSession,
+  history,
+  ...props
+}) {
   const [user, setUser] = useState({ ...props.user });
   const [errors, setErrors] = useState({});
-  const [session, setSession] = useState({});
-  const [validSessionString, setValidSessionString] = useState(false);
+  const [session, setSession] = useState({ ...props.session });
+  const [sessionIsValid, setSessionIsValid] = useState(false);
   const [expiredSession, setExpiredSession] = useState(true);
   const [loggingIn, setLoggingIn] = useState(false);
 
   useEffect(() => {
-    if (session != null && session.id >= 0) {
-      setValidSessionString(validateClientSession(session));
+    if (session != null && session.id != null) {
+      setSessionIsValid(validateClientSession(session));
       setExpiredSession(
         session.expiresEpoch < Math.round(new Date().getTime() / 1000)
       );
@@ -47,15 +54,16 @@ function HomePage({ validateUser, history, ...props }) {
         if (session == undefined) {
           toast.error("Invalid Credentials");
         } else {
-          toast.success("You're logged in!");
-          setSession(session);
+          // deleteOldSession(session);
+          initSession(session);
           history.push("/");
+          toast.success("Welcome");
         }
       })
       .catch(error => {
-        setLoggingIn(false);
         setErrors({ onLogin: error.message });
       });
+    setLoggingIn(false);
   }
 
   function handleChange(event) {
@@ -66,7 +74,7 @@ function HomePage({ validateUser, history, ...props }) {
     }));
   }
 
-  return !expiredSession && validSessionString ? (
+  return !expiredSession && sessionIsValid ? (
     <div className="jumbotron">
       <h2>Welcome, currently logged in as {user.username}</h2>
     </div>
@@ -85,6 +93,7 @@ HomePage.propTypes = {
   user: PropTypes.object.isRequired,
   session: PropTypes.object.isRequired,
   validateUser: PropTypes.func.isRequired,
+  initSession: PropTypes.func.isRequired,
   validateClientSession: PropTypes.func,
   errors: PropTypes.object,
   history: PropTypes.object.isRequired
@@ -101,6 +110,7 @@ function mapStateToProps() {
 
 const mapDispatchToProps = {
   validateUser,
+  initSession,
   validateClientSession
 };
 
