@@ -30,6 +30,14 @@ class UsersPage extends React.Component {
     }
   }
 
+  sessionIsValid(session) {
+    console.log(session);
+    if (session != null || session != undefined) {
+      return session.expiresEpoch > Math.round(new Date().getTime() / 1000);
+    } else {
+      return false;
+    }
+  }
   handleDeleteUser = async user => {
     toast.success("User Deleted");
     try {
@@ -42,7 +50,8 @@ class UsersPage extends React.Component {
   render() {
     return (
       <>
-        {this.state.redirectToAddUserPage && <Redirect to="/user" />}
+        {(this.state.redirectToAddUserPage ||
+          !this.sessionIsValid(this.props.session)) && <Redirect to="/user" />}
         <h2>Users</h2>
         {this.props.loading ? (
           <Spinner />
@@ -71,7 +80,8 @@ UsersPage.propTypes = {
   scope: PropTypes.array.scope,
   users: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  session: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -86,6 +96,7 @@ function mapStateToProps(state) {
             };
           }),
     scope: state.scope,
+    session: state.session,
     loading: state.apiCallsInProgress > 0
   };
 }

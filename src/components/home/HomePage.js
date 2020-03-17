@@ -9,6 +9,7 @@ import {
 } from "../../redux/actions/loginActions";
 import LoginForm from "./LoginForm";
 import { newUser } from "../../../tools/mockData";
+import { Link } from "react-router-dom";
 
 function HomePage({
   validateUser,
@@ -76,9 +77,17 @@ function HomePage({
     }));
   }
 
+  function handleLogout() {
+    setExpiredSession(true);
+    deleteSession({ ...props.session });
+  }
+
   return !expiredSession ? (
     <div className="jumbotron">
       <h2>Welcome, currently logged in as {props.session.loggedInAs}</h2>
+      <Link href="/" onClick={handleLogout} className="btn btn-primary btn-md">
+        Logout
+      </Link>
     </div>
   ) : (
     <LoginForm
