@@ -31,7 +31,6 @@ class UsersPage extends React.Component {
   }
 
   sessionIsValid(session) {
-    console.log(session);
     if (session != null || session != undefined) {
       return session.expiresEpoch > Math.round(new Date().getTime() / 1000);
     } else {

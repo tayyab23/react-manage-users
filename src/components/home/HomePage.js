@@ -62,7 +62,6 @@ function HomePage({
           history.push("/");
           toast.success("Welcome");
         }
-        setLoggingIn(false);
       })
       .catch(error => {
         setErrors({ onLogin: error.message });

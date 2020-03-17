@@ -1,24 +1,34 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import Navbar from "../common/Navbar";
+import PropTypes from "prop-types";
 
-const Header = () => {
-  const activeStyle = { color: "#F15B2A" };
+function Header({ ...props }) {
+  const [sessionExpired, setSessionExpired] = useState(true);
 
-  return (
-    <nav>
-      <NavLink to="/" activeStyle={activeStyle} exact>
-        Home
-      </NavLink>
-      {" | "}
-      <NavLink to="/users" activeStyle={activeStyle}>
-        Users
-      </NavLink>
-      {" | "}
-      <NavLink to="/about" activeStyle={activeStyle}>
-        About
-      </NavLink>
-    </nav>
-  );
+  useEffect(() => {
+    if (props.session != null && props.session.id != null) {
+      setSessionExpired(
+        props.session.expiresEpoch < Math.round(new Date().getTime() / 1000)
+      );
+    } else {
+      setSessionExpired(true);
+    }
+  }, [props.session]);
+
+  return <Navbar sessionExpired={sessionExpired} />;
+}
+
+Header.propTypes = {
+  session: PropTypes.object.isRequired,
+  sessionExpired: PropTypes.bool.isRequired
 };
 
-export default Header;
+function mapStateToProps(state) {
+  const session = state.session;
+  return {
+    session
+  };
+}
+
+export default connect(mapStateToProps)(Header);
