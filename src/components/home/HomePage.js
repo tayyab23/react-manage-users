@@ -39,10 +39,10 @@ function HomePage({
   }, [props.session]);
 
   function formIsValid() {
-    const { username, password } = user;
+    const { email, password } = user;
     const errors = {};
 
-    if (!username) errors.username = "Username / Email is required.";
+    if (!email) errors.email = "Email is required.";
     if (!password) errors.password = "Password is required.";
 
     setErrors(errors);

@@ -6,7 +6,7 @@ const UserList = ({ users, onDeleteClick }) => (
   <table className="table">
     <thead>
       <tr>
-        <th>Username</th>
+        <th>Name</th>
         <th>Email</th>
         <th>Scope</th>
         <th>Password</th>

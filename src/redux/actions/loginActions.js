@@ -84,7 +84,7 @@ function generateSessionJson(user) {
 
 function findUserInDbUsers(user, users) {
   for (let i = 0; i < users.length; i++) {
-    if (user.username == users[i].email || user.username == users[i].username) {
+    if (user.email == users[i].email) {
       return users[i];
     }
   }

@@ -22,11 +22,11 @@ const LoginForm = ({
           </div>
         )}
         <TextInput
-          name="username"
-          label="Username / Email"
-          value={user.username}
+          name="email"
+          label="Email"
+          value={user.email}
           onChange={onChange}
-          error={errors.username}
+          error={errors.email}
         />
 
         <PasswordInput

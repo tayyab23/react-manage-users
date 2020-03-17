@@ -22,7 +22,7 @@ const UserForm = ({
       )}
       <TextInput
         name="username"
-        label="Username"
+        label="Name"
         value={user.username}
         onChange={onChange}
         error={errors.username}

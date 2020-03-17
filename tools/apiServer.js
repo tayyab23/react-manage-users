@@ -85,7 +85,7 @@ function createSlug(value) {
 }
 
 function validateUser(user) {
-  if (!user.username) return "Username is required.";
+  if (!user.username) return "Name is required.";
   if (!user.scopeId) return "Scope is required.";
   if (!user.password) return "Password is required.";
   return "";

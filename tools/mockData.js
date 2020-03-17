@@ -1,70 +1,70 @@
 const users = [
   {
     id: 1,
-    username: "admin",
+    username: "Administrator",
     email: "admin@admin.com",
     scopeId: 1,
     password: "admin0"
   },
   {
     id: 2,
-    username: "power",
+    username: "Power User",
     email: "power@power.com",
     scopeId: 2,
     password: "power0"
   },
   {
     id: 3,
-    username: "user",
+    username: "User",
     email: "user@user.com",
     scopeId: 3,
     password: "user0"
   },
   {
     id: 4,
-    username: "adrien.poirson",
-    email: "adrien@poirson.com",
+    username: "Adrien",
+    email: "adrien@calabrio.com",
     scopeId: 3,
     password: "password123"
   },
   {
     id: 5,
-    username: "simona.hera",
+    username: "Simona Hera",
     email: "simona@hera.com",
     scopeId: 1,
     password: "password123"
   },
   {
     id: 6,
-    username: "tayyab.ahmed",
+    username: "Tayyab Ahmed",
     email: "tayyab@ahmed.com",
     scopeId: 2,
     password: "password123"
   },
   {
     id: 7,
-    username: "hello.world",
+    username: "Hello WoRlD",
     email: "hello@world.com",
     scopeId: 3,
     password: "password123"
   },
   {
     id: 8,
-    username: "alex.d",
-    email: "alex@alex.com",
+    username: "Simon Laalo",
+    email: "simon@laalo.com",
     scopeId: 1,
     password: "password123"
   },
   {
     id: 9,
-    username: "sally.k",
+    username: "Sally",
     email: "sally@calabrio.com",
     scopeId: 2,
     password: "password123"
   },
   {
     id: 10,
-    username: "canada.calabrio",
+    username: "Calabrio Canada",
     email: "canada@calabrio.com",
     scopeId: 3,
     password: "password123"
@@ -84,6 +84,7 @@ const sessions = [
 const newUser = {
   id: null,
   username: "",
+  email: "",
   scopeId: null,
   password: ""
 };
