@@ -4,35 +4,39 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import {
   validateUser,
-  validateClientSession,
-  initSession
+  initSession,
+  deleteSession
 } from "../../redux/actions/loginActions";
 import LoginForm from "./LoginForm";
-import { newUser, newSession } from "../../../tools/mockData";
+import { newUser } from "../../../tools/mockData";
 
 function HomePage({
   validateUser,
   initSession,
-  validateClientSession,
+  deleteSession,
   history,
   ...props
 }) {
   const [user, setUser] = useState({ ...props.user });
   const [errors, setErrors] = useState({});
-  const [session, setSession] = useState({ ...props.session });
-  const [sessionIsValid, setSessionIsValid] = useState(false);
   const [expiredSession, setExpiredSession] = useState(true);
   const [loggingIn, setLoggingIn] = useState(false);
 
   useEffect(() => {
-    if (session != null && session.id != null) {
-      setSessionIsValid(validateClientSession(session));
+    debugger;
+    if (props.session != null && props.session.id != null) {
       setExpiredSession(
-        session.expiresEpoch < Math.round(new Date().getTime() / 1000)
+        props.session.expiresEpoch < Math.round(new Date().getTime() / 1000)
       );
       setLoggingIn(false);
     }
-  }, [session]);
+    if (
+      props.session !== null &&
+      props.session.expiresEpoch < Math.round(new Date().getTime() / 1000)
+    ) {
+      deleteSession({ ...props.session });
+    }
+  }, [props.session]);
 
   function formIsValid() {
     const { username, password } = user;
@@ -54,7 +58,6 @@ function HomePage({
         if (session == undefined) {
           toast.error("Invalid Credentials");
         } else {
-          // deleteOldSession(session);
           initSession(session);
           history.push("/");
           toast.success("Welcome");
@@ -63,7 +66,6 @@ function HomePage({
       .catch(error => {
         setErrors({ onLogin: error.message });
       });
-    setLoggingIn(false);
   }
 
   function handleChange(event) {
@@ -74,7 +76,7 @@ function HomePage({
     }));
   }
 
-  return !expiredSession && sessionIsValid ? (
+  return !expiredSession ? (
     <div className="jumbotron">
       <h2>Welcome, currently logged in as {user.username}</h2>
     </div>
@@ -94,14 +96,14 @@ HomePage.propTypes = {
   session: PropTypes.object.isRequired,
   validateUser: PropTypes.func.isRequired,
   initSession: PropTypes.func.isRequired,
-  validateClientSession: PropTypes.func,
+  deleteSession: PropTypes.func,
   errors: PropTypes.object,
   history: PropTypes.object.isRequired
 };
 
-function mapStateToProps() {
+function mapStateToProps(state) {
   const user = newUser;
-  const session = newSession;
+  const session = state.session;
   return {
     user,
     session
@@ -111,7 +113,7 @@ function mapStateToProps() {
 const mapDispatchToProps = {
   validateUser,
   initSession,
-  validateClientSession
+  deleteSession
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

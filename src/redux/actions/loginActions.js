@@ -21,50 +21,13 @@ export function failLogin() {
   return { type: types.LOGIN_FAIL };
 }
 
-export function validateClientSession(clientSession) {
-  return sessionApi.getSession(clientSession.id).then(dbSession => {
-    if (clientSession.string === dbSession.string) {
-      return dbSession.expiresEpoch >= dbSession.expiresEpoch;
-    } else {
-      return false;
-    }
-  });
+export function deleteSession(clientSession) {
+  return function(dispatch) {
+    dispatch(beginApiCall());
+    sessionApi.deleteSession(clientSession.id).catch();
+    dispatch(deleteLoginSessionSuccess(clientSession));
+  };
 }
-
-// export function initSession(session) {
-//   debugger;
-//   return function(dispatch) {
-//     dispatch(beginApiCall());
-//     return sessionApi.getSessions().then(allSessions => {
-//       debugger;
-//       const sessionFound = checkIfMySessionIsFoundAmongAllSessions(
-//         session,
-//         allSessions
-//       );
-//       dispatch(getSessionsSuccess(session));
-//       dispatch(beginApiCall());
-//       if (sessionFound) {
-//         sessionApi.updateSession(session).then(session => {
-//           dispatch(updateLoginSuccess(session));
-//         });
-//       } else {
-//         sessionApi.addNewSession(session).then(session => {
-//           dispatch(updateLoginSuccess(session));
-//         });
-//       }
-//     });
-//   };
-// }
-
-// export function checkIfMySessionIsFoundAmongAllSessions(session, allSessions) {
-//   var sessionFound = false;
-//   var i = 0;
-//   while (!sessionFound && i < allSessions.length) {
-//     sessionFound = session.id === allSessions[i].id;
-//     i++;
-//   }
-//   return sessionFound;
-// }
 
 export function initSession(session) {
   return function(dispatch) {

@@ -8,7 +8,7 @@ export default function loginReducer(state = initialState.session, action) {
     case types.GET_SESSION_SUCCESS:
       return state;
     case types.DELETE_SESSION_SUCCESS:
-      return state.filter(session => session.id !== action.session.id);
+      return {};
     case types.LOGIN_FAIL:
       return state.filter(session => session.id !== action.session.id);
     default:
