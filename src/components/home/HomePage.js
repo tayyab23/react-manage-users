@@ -78,7 +78,7 @@ function HomePage({
 
   return !expiredSession ? (
     <div className="jumbotron">
-      <h2>Welcome, currently logged in as {user.username}</h2>
+      <h2>Welcome, currently logged in as {props.session.loggedInAs}</h2>
     </div>
   ) : (
     <LoginForm

@@ -77,6 +77,7 @@ function generateSessionJson(user) {
     .replace("0.", "");
   session.expiresEpoch = Math.round(new Date().getTime() / 1000) + 30;
   session.id = user.id;
+  session.loggedInAs = user.username;
   session.scopeId = user.scopeId;
   return session;
 }

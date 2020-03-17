@@ -92,6 +92,7 @@ const newSession = {
   id: null,
   string: "",
   scopeId: null,
+  loggedInAs: "",
   expiresEpoch: null
 };
 

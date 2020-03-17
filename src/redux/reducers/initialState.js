@@ -1,6 +1,6 @@
 export default {
   users: [],
   scope: [],
-  session: null,
+  session: {},
   apiCallsInProgress: 0
 };
