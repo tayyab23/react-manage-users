@@ -63,6 +63,7 @@ function ManageUsersPage({
     event.preventDefault();
     if (!formIsValid()) return;
     setSaving(true);
+    delete user["cPassword"];
     saveUser(user)
       .then(() => {
         toast.success("User saved.");

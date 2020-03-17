@@ -23,7 +23,6 @@ function HomePage({
   const [loggingIn, setLoggingIn] = useState(false);
 
   useEffect(() => {
-    debugger;
     if (props.session != null && props.session.id != null) {
       setExpiredSession(
         props.session.expiresEpoch < Math.round(new Date().getTime() / 1000)
@@ -62,6 +61,7 @@ function HomePage({
           history.push("/");
           toast.success("Welcome");
         }
+        setLoggingIn(false);
       })
       .catch(error => {
         setErrors({ onLogin: error.message });
